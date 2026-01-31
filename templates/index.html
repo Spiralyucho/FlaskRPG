@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flask RPG</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h2>🧙 플레이어</h2>
+HP: {{ player.hp }}/{{ player.max_hp }}
+<progress value="{{ player.hp }}" max="{{ player.max_hp }}"></progress><br>
+MP: {{ player.mp }}/{{ player.max_mp }}
+<progress value="{{ player.mp }}" max="{{ player.max_mp }}"></progress><br>
+GOLD: {{ player.gold }}
+
+<hr>
+
+{% if state == "menu" %}
+  <button onclick="location.href='/battle'">⚔ 전투 시작</button>
+  <button onclick="location.href='/save'">💾 저장</button>
+  <button onclick="location.href='/load'">📂 불러오기</button>
+{% endif %}
+
+{% if state == "battle" and monster %}
+  <h3>{{ monster.name }}</h3>
+  HP: {{ monster.hp }}/{{ monster.max_hp }}
+  <progress value="{{ monster.hp }}" max="{{ monster.max_hp }}"></progress>
+
+  <button onclick="location.href='/attack/normal'">⚔ 공격</button>
+  <button onclick="location.href='/attack/skill'">🔥 스킬</button>
+  <button onclick="location.href='/attack/ult'">💥 궁극기</button>
+{% endif %}
+
+<p class="log">{{ log }}</p>
+
+</body>
+</html>
